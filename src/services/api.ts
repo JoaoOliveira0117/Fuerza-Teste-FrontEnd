@@ -19,8 +19,7 @@ http.interceptors.response.use(
     }: { response?: AxiosResponse; request?: XMLHttpRequest } = error;
     if (response) {
       if (response.status >= 400 && response.status < 500) {
-        console.log(response.data?.data?.message, 'error');
-        return null;
+        return Promise.reject(response.data?.data?.message ?? 'error'); // return "handleable" error
       }
     } else if (request) {
       console.log('Request failed. Please try again.', 'error');
