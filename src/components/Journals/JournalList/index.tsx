@@ -33,7 +33,7 @@ export function JournalList(props: { user: UserProps | undefined}){
                 <ul>
                 { userJournals.map((journal: Journal) => // Generates a link to the journal with ID and Title (as URL params)
                     <li key={journal.id}>
-                        <Link to={`${path}/${journal.id}?title=${journal.title}`}>
+                        <Link to={`${path}/${journal.id}`}>
                             {journal.title}
                         </Link>
                     </li>

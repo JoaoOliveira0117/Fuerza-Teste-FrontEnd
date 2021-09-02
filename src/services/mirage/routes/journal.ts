@@ -62,6 +62,16 @@ export const addEntry = (
   }
 };
 
+// function created for easier journal data management.
+export const getSingleJournal = (schema: any, req: Request): Journal | Response => {
+  try {
+    const journal = schema.journals.find(req.params.id);
+    return journal as Journal;
+  } catch (error){
+    return handleErrors(error, 'Could not get journal.');
+  }
+}
+
 export const getJournals = (schema: any, req: Request): Journal[] | Response => {
   try {
     const user = schema.users.find(req.params.id);

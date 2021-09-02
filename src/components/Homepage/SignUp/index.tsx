@@ -11,7 +11,6 @@ export function SignUp() {
 
     const login = () => {
         http.post("/auth/signup",{ username, password, email })
-            .then(response => console.log(response))
             .catch(error => setError(error));
     }
 

@@ -3,25 +3,26 @@ import http from "../../../services/api";
 import { useParams, useHistory } from "react-router-dom";
 import { Entry } from "../../../interfaces/entry.interface";
 
-interface IParams { id: string; }
+interface IParams { 
+    entryId: string,
+}
 
-export function NotesCreate(){
+export function NotesEdit(){
     const [entry, setEntry] = useState<Entry>();
     const [entryTitle, setEntryTitle] = useState("");
     const [entryContent, setEntryContent] = useState("");
 
     const history = useHistory();
-    const { id } = useParams<IParams>()
+    const { entryId }= useParams<IParams>()
 
     //on button click, sets Entry title and content
     const createNote = () => {
         setEntry({title: entryTitle, content: entryContent})
     }
 
-    //at the moment an entry is created, it is sended to the api
     useEffect(() => {
         if(entry)
-            http.post(`/journals/entry/${id}`,entry)
+            http.put(`/journals/entry/${entryId}`,entry)
                 .then(response => history.goBack())
                 .catch(error => console.log(error));
     },[entry])
