@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import { Journals } from './components/Journals';

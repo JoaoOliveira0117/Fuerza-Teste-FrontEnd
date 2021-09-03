@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import http from "../../../services/api";
 import { Link, useHistory  } from "react-router-dom";
+import { Background, Container, LoginInput } from "./styles";
 
 import LogoImg from "../../../assets/LogoImg.svg";
+import BackgroundImg from "../../../assets/BackgroundImg.svg";
 
 export function SignIn() {
     const [username,setUsername] = useState("");
@@ -12,6 +14,11 @@ export function SignIn() {
     const history = useHistory();
 
     const login = () => {
+        setError("");
+
+        if(username === "" || password === ""){
+            return setError("Username and password must be provided");
+        }
 
         http.post("/auth/login",{ username, password })
             .then(response => localStorage.setItem("@user", JSON.stringify(response))) // save user auth data on local storage
@@ -21,44 +28,59 @@ export function SignIn() {
 
     return (
         <>
-            <div className="container">
-                <div>
-                    <img src={LogoImg} alt="logo"></img>
-                </div>
-                <div>
-                    <h2>Sign in</h2>
-                    <Link to="/signup">Sign up</Link>
-                </div>
-                <div>
-                    <input 
-                        type="text" 
-                        className="username" 
-                        name="username"
-                        placeholder="Your username"
-                        onChange={(e)=>{
-                            setUsername(e.target.value);
-                        }}
-                    ></input>
-                    <input 
-                        type="Password" 
-                        className="password" 
-                        name="password"
-                        placeholder="Your password"
-                        onChange={(e)=>{
-                            setPassword(e.target.value);
-                        }}
-                    ></input>
-                    <div>
-                        <a href="/">Forgot Password?</a>
+            <Container>
+                <div className="content-wrapper">
+                    <Background>
+                        <img src={BackgroundImg} alt="backgroundImg"/>
+                    </Background>
+                    <div className="loginForm">
+                        <div className="logo-wrapper">
+                            <img src={LogoImg} alt="logo"/>
+                        </div>
+                        <div className="header">
+                            <h1>Sign in</h1>
+                            <Link className="link" to="/signup">Sign up</Link>
+                        </div>
+                        <div>
+                            <LoginInput>
+                                <input 
+                                    type="text" 
+                                    className="username" 
+                                    name="username"
+                                    placeholder=" "
+                                    onChange={(e)=>{
+                                        setUsername(e.target.value);
+                                    }}
+                                ></input>
+                                <span>Your username</span>
+                            </LoginInput>
+                            <LoginInput>
+                                <input 
+                                    type="Password" 
+                                    className="password" 
+                                    name="password"
+                                    placeholder=" "
+                                    onChange={(e)=>{
+                                        setPassword(e.target.value);
+                                    }}
+                                ></input>
+                                <span>Your password</span>
+                            </LoginInput>
+                            <div className="link-container">
+                                <Link className="link forgot-password" to="/">Forgot Password?</Link>
+                            </div>
+                        </div>
+                        <div className="error">
+                            <p>{error ?? error}</p>
+                        </div>
+                        <div className="button-wrapper">
+                            <button onClick={login}>
+                                Log In
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <button onClick={login}>
-                        Log In
-                    </button>
-                    {error ?? <div>{error}</div>}
-                </div>
-            </div>
+            </Container>
         </>
     )
 }
