@@ -81,6 +81,15 @@ export const getJournals = (schema: any, req: Request): Journal[] | Response => 
   }
 };
 
+export const getSingleEntry = ( schema: any, req: Request): Entry | Response => {
+  try {
+    const entry = schema.entries.find(req.params.id);
+    return entry as Entry;
+  } catch (error) {
+    return handleErrors(error, 'Failed to update entry.');
+  }
+}
+
 export const getEntries = (
   schema: any,
   req: Request

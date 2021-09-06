@@ -39,13 +39,22 @@ export function NotesEdit(){
             });
     },[]);
 
+    useEffect(() => {
+        http.get(`/journals/entries/one/${entryId}`)
+            .then(response => {
+                let {entry} = JSON.parse(JSON.stringify(response)); //response returns a AxiosResponse object, to fix this we can "transform" it into a JSON Journal object.
+                setEntryTitle(entry.title);
+                setEntryContent(entry.content);
+            });
+    },[journal]);
+
     //at the moment an entry is created, it is sended to the api
     useEffect(() => {
         if(entry)
             http.put(`/journals/entry/${entryId}`,entry)
                 .then(response => history.goBack())
                 .catch(error => console.log(error));
-    },[entry])
+    },[entry]);
 
     return (
         <>
@@ -63,6 +72,7 @@ export function NotesEdit(){
                             type="text" 
                             name="title" 
                             placeholder="Title"
+                            value={entryTitle}
                             onChange={(e) => setEntryTitle(e.target.value)}
                         ></input>
                         <textarea 
@@ -70,6 +80,7 @@ export function NotesEdit(){
                             rows={20}
                             name="content" 
                             placeholder="Write your note"
+                            value={entryContent}
                             onChange={(e) => setEntryContent(e.target.value)}
                         ></textarea>
                     </div>

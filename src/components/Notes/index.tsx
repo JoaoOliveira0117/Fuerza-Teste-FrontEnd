@@ -60,12 +60,6 @@ export function NotesList(){
 
     return (
         <>
-            {/* //if journal has entries, render button at the top of the page */}
-            {journalEntries?.entries.length !== 0 ? 
-                    <Button>
-                        <Link to={`${url}/create`}>+ Add note</Link>
-                    </Button> 
-                : ''}
             <Container>
                 <div className="content-wrapper">
                     {journalEntries?.entries.length !== 0 ? // if there are entries, render them as list.
@@ -89,14 +83,20 @@ export function NotesList(){
                                         ></input>
                                     }
                                 </div>
+                                <Button>
+                                    <Link to={`${url}/create`}>+ Add note</Link>
+                                </Button> 
                             </div>
                             <div className="notes-wrapper">
                                 { journalEntries?.entries.map((entry: Entry) => //on click, sends user to entry editing page by url fulfilled with parameters.
                                     <Link to={`${url}/${entry.id}`} key={entry.id}> 
                                         <div className="note">
-                                            <p> 
-                                                {entry.content}
-                                            </p>
+                                            <div className="text">
+                                                <p> 
+                                                    {entry.content}
+                                                </p>
+                                            </div>
+                                            <div className="back-note"/>
                                         </div>
                                     </Link>
                                 )}

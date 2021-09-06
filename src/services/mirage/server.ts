@@ -45,6 +45,7 @@ export const setupServer = (env?: string): Server => {
       this.urlPrefix = 'https://fuerza.test';
 
       this.get('/journals/entries/:id', journal.getEntries);
+      this.get('/journals/entries/one/:id', journal.getSingleEntry); // route created for single entry responses.
       this.get('/journals/:id', journal.getJournals);
       this.get('/journals/one/:id', journal.getSingleJournal); // route created for single journal responses.
 

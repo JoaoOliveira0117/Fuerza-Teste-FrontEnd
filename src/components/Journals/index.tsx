@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import http from "../../services/api";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { Link, Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import { User } from "../../interfaces/user.interface";
 import { NotesList } from "../Notes";
 import { NotesCreate } from "../Notes/NotesCreate";
@@ -46,7 +46,9 @@ export function Journals(){
                     </Background>
                     <div className="app-wrapper">
                         <div className="logo">
-                            <img src={LogoImg} alt="logo"></img>
+                            <Link to="/journals">
+                                <img src={LogoImg} alt="logo"></img>
+                            </Link>
                         </div>   
 
                         {/* Jorunal routes list */}

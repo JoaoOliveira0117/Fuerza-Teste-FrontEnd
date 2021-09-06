@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import http from "../../../services/api";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Background, Container, SignupInput } from "./styles";
 
 import LogoImg from "../../../assets/LogoImg.svg";
@@ -12,6 +12,8 @@ export function SignUp() {
     const [email,setEmail] = useState("");
     const [error,setError] = useState("");
 
+    const history = useHistory();
+
     const login = async () => {
         setError("");
 
@@ -20,6 +22,7 @@ export function SignUp() {
         }
 
         await http.post("/auth/signup",{ username, password, email })
+            .then(response => history.goBack())
             .catch(error => setError(error));
     }
 

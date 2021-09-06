@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-
     .journal-wrapper{
-        margin-top: 6rem;
+        margin-top: 8rem;
     }
     .journal {
         position: relative;

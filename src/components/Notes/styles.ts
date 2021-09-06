@@ -5,6 +5,7 @@ export const Container = styled.div`
     margin: auto;
 
     .header{
+        margin-left: 1rem;
         margin-top: 2rem;
         display: inline-flex;
         min-height: 2rem;
@@ -47,19 +48,72 @@ export const Container = styled.div`
         margin-top: 1rem;
         display: grid;
         grid-template-columns: repeat(2,1fr);
-        gap: 0.6rem;
+
+        @media (min-width: 1080px) {
+            gap: 1.6rem 1rem;
+        }
+
+        @media (max-width: 1080px) {
+            gap: 1.4rem 0.6rem;
+        }
+
+        @media (max-width: 720px) {
+            gap: 1.2rem 0.2rem;
+        }
 
         .note {
-            width: 10rem;
-            height: 12rem;
+            margin: auto;
+            width: 11rem;
+            height: 13rem;
             padding: 0.5rem;
             background-color: #FAF2EC;
             box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.12);
             border-radius: 4px;
+            position: relative;
+            z-index: 10;
 
-            p {
-                overflow: hidden;
-                text-overflow: ellipsis; 
+            .text{
+                position: absolute;
+                z-index: 11;
+
+                p {
+                    word-break: break-all;
+                    max-width: 11rem;
+                    max-height: 12rem;
+                    font-size: 1.325rem;
+                    overflow-y: auto;
+
+                    ::-webkit-scrollbar {
+                        width: 0.4rem;
+                    }
+
+                    /* Track */
+                    ::-webkit-scrollbar-track {
+                        background: #FAF2EC; 
+                    }
+                    
+                    /* Handle */
+                    ::-webkit-scrollbar-thumb {
+                        background: var(--brown); 
+                    }
+
+                    /* Handle on hover */
+                    ::-webkit-scrollbar-thumb:hover {
+                        background: var(--brown-dark); 
+                    }
+                }
+            }
+
+            .back-note {
+                width: 11rem;
+                height: 13rem;
+                padding: 0.5rem;
+                background-color: #FAF2EC;
+                box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.12);
+                position: absolute;
+                z-index: 1;
+                top: -0.2rem;
+                left: 0.2rem;
             }
         }
 
@@ -71,7 +125,7 @@ export const Container = styled.div`
     }
 
     .empty-header{
-        margin-bottom: 4rem;
+        margin-bottom: 5rem;
         h1{
             font-family: 'Abhaya Libre', serif;
             color: #000;
@@ -80,14 +134,14 @@ export const Container = styled.div`
     }
 
     .empty-wrapper{
-        margin-top: 10rem;
+        margin-top: 7rem;
 
         @media (max-width: 1080px) {
-            margin-top: 11rem;
+            margin-top: 8rem;
         }
 
         @media (max-width: 720px) {
-            margin-top: 12rem;
+            margin-top: 9rem;
         }
 
         .empty {
@@ -95,7 +149,7 @@ export const Container = styled.div`
         }
 
         .link {
-            margin-top: 4rem;
+            margin-top: 9rem;
             text-align: center;
 
             a,
@@ -109,7 +163,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
     position: absolute;
-    top: -0.2rem;
+    top: 1.4rem;
     right: 1.2rem;
     background-color: var(--background);
     border: 1px solid var(--brown);

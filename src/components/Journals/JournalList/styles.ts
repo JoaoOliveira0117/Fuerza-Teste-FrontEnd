@@ -31,15 +31,16 @@ export const Container = styled.div`
         margin-top: 2rem;
         display: grid;
         grid-template-columns: repeat(2,1fr);
-        gap: 0.6rem;
+        gap: 1.8rem 0.6rem;
     }
 
     .journal-box {
         margin: auto; 
 
         .journal {
+            margin: auto;
             position: relative;
-            width: 9rem;
+            width: 10rem;
             height: 12.5rem;
 
             @media (max-width: 1080px) {
@@ -78,7 +79,7 @@ export const Container = styled.div`
 export const Button = styled.button`
     position: absolute;
     top: -0.2rem;
-    right: 1.2rem;
+    right: 0.8rem;
     background-color: var(--background);
     border: 1px solid var(--brown);
     border-radius: 3rem;
